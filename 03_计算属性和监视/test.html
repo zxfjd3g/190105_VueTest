@@ -17,16 +17,48 @@
   计算属性存在缓存, 多次读取只执行一次getter计算
 -->
 <div id="demo">
-  姓: <input type="text" placeholder="First Name"><br>
-  名: <input type="text" placeholder="Last Name"><br>
-  姓名1(单向): <input type="text" placeholder="Full Name1"><br>
+  姓: <input type="text" placeholder="First Name" v-model="firstName"><br>
+  名: <input type="text" placeholder="Last Name" v-model="lastName"><br>
+  姓名1(单向): <input type="text" placeholder="Full Name1" v-model="fullName1"><br>
   姓名2(单向): <input type="text" placeholder="Full Name2"><br>
-  姓名3(双向): <input type="text" placeholder="Full Name3"><br>
+  姓名3(双向): <input type="text" placeholder="Full Name3" v-model="fullName3"><br>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el: '#demo',
+    data: {
+      firstName: 'A',
+      lastName: 'B',
+      // fullName1: 'A-B'
+    },
+    computed: {
+      /*
+      相当属性的getter, 执行的时机:
+        1). 初始显示
+        2). 相关依赖数据发生改变
+       */
+      fullName1 () {
+        console.log('fullName1()')
+        return this.firstName + '-' + this.lastName
+      },
 
+      fullName3: {
+        get () {
+          console.log('fullName3 get()')
+          return this.firstName + '-' + this.lastName
+        },
+
+        set(value) {
+          console.log('set()', value)
+          const names = value.split('-')
+          this.firstName = names[0]
+          this.lastName = names[1]
+        }
+      }
+    }
+  })
 </script>
 </body>
 </html>
