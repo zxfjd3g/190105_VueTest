@@ -31,10 +31,17 @@
 <script type="text/javascript">
   const vm = new Vue({ // 配置对象
     el: '#test',  // element: 选择器, 指定vue来管理哪片页面区域
-    data: {  // 为模板页面提供需要的数据
+    /*data: {  // 为模板页面提供需要的数据
       msg: "atguigu"
+    }*/
+    data () {
+      return {
+        msg: "atguigu"
+      }
     }
   })
+
+  // vm.$mount('#test')
 
   setTimeout(() => {
     vm.msg = 'xxxxx'

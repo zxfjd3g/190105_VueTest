@@ -36,7 +36,7 @@
 	Vue就会管理对应的标签及其子标签
 
 ## 2). data
-	对象或函数类型
+	对象或函数类``型
 	指定初始化状态属性数据的对象
 	vm也会自动拥有data中所有属性
 	页面中可以直接访问使用
@@ -110,7 +110,7 @@
 	v-text/v-html: 指定标签体
     	* v-text : 当作纯文本
 		* v-html : 将value作为html标签来解析
-	v-if v-else v-show: 显示/隐藏元素
+	v-if v-else, v-else-if v-show: 显示/隐藏元素
 		* v-if : 如果vlaue为true, 当前标签会输出在页面中
 		* v-else : 与v-if一起使用, 如果value为false, 将当前标签输出到页面中
 		* v-show: 就会在标签中添加display样式, 如果vlaue为true, display=block, 否则是none
