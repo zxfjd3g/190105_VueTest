@@ -23,16 +23,74 @@
 <div id="example">
 
   <h2>1. 绑定监听</h2>
+  <button @click="test1('abc')">test1</button>
+  <button @click="test2('abc', $event)">test2</button>
 
   <h2>2. 事件修饰符</h2>
+  <!--
+    1. 阻止事件默认行为
+    2. 停止事件冒泡
+  -->
+  <a href="http://www.atguigu.com" @click.prevent="test3">百度一下</a>
+  <div style="width: 200px; height: 200px;background: red" @click="test4">
+    <div style="width: 100px; height: 100px;background: blue" @click.stop="test5">
+    </div>
+  </div>
 
   <h2>3. 按键修饰符</h2>
+  <input type="text" v-model="msg" @keyup="test6">
+  <input type="text" v-model="msg" @keyup.13="test7">
+  <input type="text" v-model="msg" @keyup.enter="test7">
 
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : '#example',
+    data : {
+      msg: ''
+    },
+    methods : {
+      test1 (msg) {
+        alert(msg)
+      },
 
+      test2 (msg, event) {
+        alert(msg + '---' + event.target.textContent)
+      },
+
+      test3 (event) {
+        // 阻止事件默认行为
+        // event.preventDefault()
+        alert('点击了链接')
+      },
+
+      test4 () {
+        alert('外面')
+      },
+      test5 (event) {
+        // 停止事件冒泡
+        // event.stopPropagation()
+
+        alert('里面')
+      },
+
+      test6 (event) {
+        if(event.keyCode===13) {
+          alert(this.msg)
+        }
+      },
+
+      test7 () {
+        alert(this.msg)
+      },
+    },
+
+    computed : {
+
+    }
+  })
 </script>
 </body>
 </html>
