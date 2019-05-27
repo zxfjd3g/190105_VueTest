@@ -24,8 +24,13 @@
 		el : 指定dom标签容器的选择器
 		data : 指定初始化状态数据的对象/函数(返回一个对象)
 	3). 在页面模板中使用{{}}或vue指令
-		
-# 3. Vue对象的选项
+
+# 3. 说说MVVM设计模式
+    M: Model(模型), vue中是data(为view提供数据)
+    V: View(视图), vue中是模板页面(显示data中的数据)
+    VM: ViewModel(视图模型), vue中是Vue实例对象(管理者: 数据绑定/DOM监听) 
+    		
+# 4. Vue对象的选项
 ## 1). el
 	指定dom标签容器的选择器
 	Vue就会管理对应的标签及其子标签
@@ -61,7 +66,7 @@
 		}
 	另一种添加监视方式: vm.$watch('xxx', funn)
 
-# 4. 过渡动画
+# 5. 过渡动画
 	利用vue去操控css的transition/animation动画
 	模板: 使用<transition name='xxx'>包含带动画的标签
 	css样式
@@ -80,14 +85,14 @@
 	      <p v-if="show">hello</p>
 	    </transition>
     
-# 5. 生命周期
+# 6. 生命周期
 	vm/组件对象
 	生命周期图
 	主要的生命周期函数(钩子)
     	created() / mounted(): 启动异步任务(启动定时器,发送ajax请求, 绑定监听)
     	beforeDestroy(): 做一些收尾的工作
 
-# 6. 自定义过滤器
+# 7. 自定义过滤器
 ## 1). 理解
 	对需要显示的数据进行格式化后再显示
 
@@ -101,7 +106,7 @@
 		<div>{{myData | filterName}}</div>
 		<div>{{myData | filterName(arg)}}</div>
 	
-# 7. vue内置指令
+# 8. vue内置指令
 	v-text/v-html: 指定标签体
     	* v-text : 当作纯文本
 		* v-html : 将value作为html标签来解析
@@ -133,7 +138,7 @@
 		* ref='xxx'
 		* 读取得到标签对象: this.$refs.xxx
   
-# 8. 自定义指令
+# 9. 自定义指令
 ## 1). 注册全局指令
     Vue.directive('my-directive', function(el, binding){
       el.innerHTML = binding.value.toUpperCase()
