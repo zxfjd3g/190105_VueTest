@@ -17,14 +17,63 @@
 
 <div id="demo">
   <h2>测试: v-for 遍历数组</h2>
+  <ul>
+    <li v-for="(p, index) in persons" :key="p.id">
+      {{index}} ---{{p.id}}---{{p.name}}---{{p.age}}
+      ---<button @click="deleteP(index)">删除</button>
+      ---<button @click="updateP(index, {id: Date.now(), name: 'Jarry', age: 16})">修改</button>
+    </li>
+  </ul>
 
   <h2>测试: v-for 遍历对象</h2>
+  <ul>
+    <li v-for="(value, key) in persons[1]" :key="key">
+      {{key}}: {{value}}
+    </li>
+  </ul>
 
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : '#demo',
+    data : {
+      persons: [
+        {id: 1, name: 'Tom', age: 15},
+        {id: 3, name: 'Jack', age: 16},
+        {id: 5, name: 'bob', age: 13},
+        {id: 7, name: 'Cat', age: 14},
+      ]
+    },
+    methods : {
+      /*
+      删除指定下标的人
+       */
+      deleteP (index) {
+        /*
+        vue对data中的数组的方法进行重写
+          1). 先调用原生数组的对应方法
+          2). 更新界面
+        */
+        this.persons.splice(index, 1) // 此处调用的不是原生数组的splice(), 而是一个重写方法
+      },
 
+      /*
+      更新指定下标的人
+       */
+      updateP (index, newP) {
+        this.persons[index] = newP  // 不会更新界面: vue没有通过set来监视数组中的属性
+//        this.persons[index].name = newP.name
+//        this.persons[index].age = newP.age
+//        this.persons = []
+      }
+    },
+
+    computed : {
+
+    }
+  })
 </script>
 </body>
 </html>
